@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Edit Song</h1>
+    <h2>Enter Song Name:</h2>
+    <form action="/songs" method="post">
+      <label for="Name">Name: </label>
+      <input id="Name" type="text" name="song[name]" value="<%=@song.name%>">
+    <h2>Rename Artist:</h2>
+        <label for="Artist Name"> Name: </label>
+        <input id="Artist Name" type="text" name="artist[name]" value="<%=@song.artist.name%>">
+    <h2>Select Genres:</h2>
+      <%@genres.each do |genre|%>
+        <input id="<%=genre.name%>" type="checkbox" name="genre_ids[]" value="<%= genre.id %>"><%=genre.name%>
+        <% if @song.genre_ids.include?(genre.id) %>
+          checked
+        <% end %>
+      </input>
+      <%end%>
+      <h3>Or Add New Genres:</h3>
+        <label for="Genre">Name: </label>
+        <input id="Genre" type="text" name="genre[:name]">
+      <input type="submit" value="Save">
+    </form>
+  </body>
+</html>
